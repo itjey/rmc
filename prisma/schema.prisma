@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Contestant {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  school    String
+  country   String
+  createdAt DateTime @default(now())
+}
+
+model Problem {
+  id         String       @id @default(cuid())
+  title      String
+  statement  String
+  answer     String
+  points     Int
+  releaseAt  DateTime
+  createdAt  DateTime     @default(now())
+  submissions Submission[]
+}
+
+model Submission {
+  id              String   @id @default(cuid())
+  contestantEmail String
+  answer          String
+  isCorrect       Boolean
+  score           Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  problemId       String
+  problem         Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
+
+  @@unique([problemId, contestantEmail])
+}

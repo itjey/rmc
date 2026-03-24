@@ -1,0 +1,68 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx prisma generate
+
+      - run: npx prisma db push --accept-data-loss
+        env:
+          DATABASE_URL: "file:./prisma/dev.db"
+
+      - name: Patch dynamic pages for static export
+        run: |
+          sed -i 's|action={submitAnswer}|action="#"|g' src/app/contest/page.tsx
+          sed -i 's|action={registerContestant}|action="#"|g' src/app/registration/page.tsx
+          sed -i 's|action={registerVolunteer}|action="#"|g' src/app/registration/page.tsx
+          sed -i '/import.*from.*@\/app\/actions/d' src/app/contest/page.tsx
+          sed -i '/import.*from.*@\/app\/actions/d' src/app/registration/page.tsx
+          sed -i 's|searchParams: Promise<{ message?: string }>||g' src/app/registration/page.tsx
+          sed -i 's|const params = await searchParams;|const params = { message: "" };|g' src/app/registration/page.tsx
+          sed -i 's|searchParams: Promise<{ message?: string }>||g' src/app/contest/page.tsx || true
+          printf 'import { SiteHeader } from "@/components/SiteHeader";\nimport { SiteFooter } from "@/components/SiteFooter";\nexport default function AdminPage() {\n  return (\n    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">\n      <SiteHeader />\n      <div className="mx-auto max-w-6xl px-6 py-20 text-center lg:px-10">\n        <h1 className="font-serif text-4xl font-bold text-white">Admin</h1>\n        <p className="mt-4 text-[var(--muted)]">Requires server environment.</p>\n      </div>\n      <SiteFooter />\n    </main>\n  );\n}\n' > src/app/admin/page.tsx
+          rm -rf src/app/api
+
+      - name: Build
+        run: npm run build
+        env:
+          STATIC_EXPORT: "true"
+          DATABASE_URL: "file:./prisma/dev.db"
+          ADMIN_PASSWORD: "build"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
