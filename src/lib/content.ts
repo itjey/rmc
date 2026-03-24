@@ -248,18 +248,20 @@ export const sponsorTiers = [
     name: "Presenting Sponsor",
     description: "The flagship partner of Rule Mathematics Competition.",
     benefits: [
+      "Access to RMC Resume Book (Opt-in dataset of top quantitative talent)",
+      "Co-branded Recruiting Event (e.g. info session or AMA)",
       "Logo featured on every page of the competition website",
       "Naming rights for one competition round",
       "Featured in all student and school communications",
       "Logo on competition packets and certificates",
       "Dedicated section on the sponsors page",
-      "Social media recognition across all channels",
     ],
   },
   {
     name: "Gold Sponsor",
     description: "A major supporter of student mathematics competition.",
     benefits: [
+      "Access to RMC Resume Book (Opt-in dataset)",
       "Logo on the sponsors page and homepage sponsors section",
       "Logo on competition packet headers",
       "Mention in opening and closing communications",
@@ -435,3 +437,28 @@ export const faq = [
 
 export const buzzerQualification =
   "The top teams by combined score (sum of individual scores of all team members plus team round score) advance to the buzzer finals. The exact number of qualifying teams depends on registration size and is announced after the written rounds conclude. Tiebreakers for qualification follow the same rules as team standings.";
+
+export const advisoryBoard = [
+  {
+    name: "Dr. Jane Doe",
+    role: "Problem Committee Chair",
+    credentials: "MIT Math PhD, Former IMO Team USA Medalist",
+  },
+  {
+    name: "John Smith",
+    role: "Senior Problem Reviewer",
+    credentials: "Putnam Fellow, Quantitative Researcher at Top Fund",
+  },
+];
+
+export const industryPartners = [
+  { name: "Jane Street", placeholder: true },
+  { name: "Citadel", placeholder: true },
+  { name: "Hudson River Trading", placeholder: true }
+];
+
+export const reachMetrics = [
+  { label: "Target Audience", value: "Top high school talent nationwide" },
+  { label: "Pipeline", value: "Direct path to top STEM universities" },
+  { label: "Reach", value: "Students from 40+ states" },
+];

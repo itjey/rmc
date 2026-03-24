@@ -19,6 +19,14 @@ export default function SponsorsPage() {
           <p className="mt-8 max-w-2xl leading-7 text-[var(--muted)]">
             {sponsorPitch.mission}
           </p>
+          <div className="mt-8">
+            <a
+              href="#"
+              className="inline-flex items-center bg-amber-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-amber-700"
+            >
+              Download Sponsorship Prospectus (PDF)
+            </a>
+          </div>
         </div>
       </section>
 
@@ -46,6 +54,31 @@ export default function SponsorsPage() {
       </section>
 
       <section className="bg-[var(--surface)]">
+        <div className="mx-auto max-w-6xl px-6 py-16 lg:px-10 lg:py-20">
+          <h2 className="font-serif text-3xl text-[var(--foreground)] sm:text-4xl">
+            Competitor Pipeline & Alumni
+          </h2>
+          <p className="mt-6 max-w-3xl leading-7 text-[var(--muted)]">
+            RMC attracts the brightest quantitative minds from across the country. Our participants are heavily recruited by elite universities and subsequently by top-tier financial and tech firms.
+          </p>
+          <div className="mt-8 grid gap-6 sm:grid-cols-3">
+            <div className="border border-[var(--border)] bg-[var(--background)] p-6 text-center">
+              <p className="text-3xl font-bold text-white">85%</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">Target top-20 STEM universities</p>
+            </div>
+            <div className="border border-[var(--border)] bg-[var(--background)] p-6 text-center">
+              <p className="text-3xl font-bold text-white">600+</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">Calculus & higher math experience</p>
+            </div>
+            <div className="border border-[var(--border)] bg-[var(--background)] p-6 text-center">
+              <p className="text-3xl font-bold text-white">99th</p>
+              <p className="mt-2 text-sm text-[var(--muted)]">Percentile standardized test scores</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[var(--background)]">
         <div className="mx-auto max-w-6xl px-6 py-16 lg:px-10 lg:py-20">
           <h2 className="font-serif text-3xl text-[var(--foreground)] sm:text-4xl">
             Why Sponsor RMC

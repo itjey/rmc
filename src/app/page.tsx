@@ -7,27 +7,13 @@ import {
   rounds,
   schedule,
   site,
-  sponsorTiers,
+  advisoryBoard,
+  industryPartners,
+  reachMetrics,
 } from "@/lib/content";
 import { archiveEntries } from "@/lib/archive-data";
-async function getStats() {
-  try {
-    const { ensureSeed } = await import("@/lib/bootstrap");
-    const { prisma } = await import("@/lib/prisma");
-    await ensureSeed();
-    const [contestants, releasedProblems] = await Promise.all([
-      prisma.contestant.count(),
-      prisma.problem.count({ where: { releaseAt: { lte: new Date() } } }),
-    ]);
-    return { contestants, releasedProblems };
-  } catch {
-    return { contestants: 0, releasedProblems: 0 };
-  }
-}
 
-export default async function Home() {
-  const { contestants, releasedProblems } = await getStats();
-
+export default function Home() {
   return (
     <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <SiteHeader />
@@ -119,20 +105,35 @@ export default async function Home() {
 
       <section className="border-t border-white/10 bg-[#131620]">
         <div className="mx-auto max-w-6xl px-6 py-16 lg:px-10 lg:py-20">
-          <h2 className="font-serif text-3xl text-white sm:text-4xl">By the Numbers</h2>
+          <h2 className="font-serif text-3xl text-white sm:text-4xl">National Reach & Pipeline</h2>
+          <p className="mt-4 max-w-2xl leading-7 text-neutral-400">
+            RMC is built to challenge and identify the top mathematical minds across the country, providing a direct pipeline to elite STEM university programs and quantitative finance firms.
+          </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
-            <div className="border border-white/10 bg-[#181b24] p-8">
-              <p className="text-sm text-neutral-500">Registered students</p>
-              <p className="mt-3 font-mono text-4xl font-bold text-white">{contestants}</p>
-            </div>
-            <div className="border border-white/10 bg-[#181b24] p-8">
-              <p className="text-sm text-neutral-500">Released problems</p>
-              <p className="mt-3 font-mono text-4xl font-bold text-white">{releasedProblems}</p>
-            </div>
-            <div className="border border-white/10 bg-[#181b24] p-8">
-              <p className="text-sm text-neutral-500">Practice problems available</p>
-              <p className="mt-3 font-mono text-4xl font-bold text-white">68</p>
-            </div>
+            {reachMetrics.map((metric) => (
+              <div key={metric.label} className="border border-white/10 bg-[#181b24] p-8">
+                <p className="text-sm text-neutral-500">{metric.label}</p>
+                <p className="mt-3 text-xl font-bold text-white">{metric.value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-white/10 bg-[#0e1015]">
+        <div className="mx-auto max-w-6xl px-6 py-16 lg:px-10 lg:py-20">
+          <h2 className="font-serif text-3xl text-white sm:text-4xl">Advisory Board & Committee</h2>
+          <p className="mt-4 max-w-2xl leading-7 text-neutral-400">
+            Our problems are reviewed and calibrated by top mathematical talent, ensuring a rigorous benchmark spanning from AMC to AIME and beyond.
+          </p>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+            {advisoryBoard.map((member) => (
+              <div key={member.name} className="border border-white/10 bg-[#181b24] p-6 text-center sm:text-left">
+                <h3 className="font-serif text-xl font-semibold text-white">{member.name}</h3>
+                <p className="mt-1 text-sm font-medium text-amber-500">{member.role}</p>
+                <p className="mt-3 text-sm leading-6 text-neutral-400">{member.credentials}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -161,26 +162,35 @@ export default async function Home() {
 
       <section className="border-t border-white/10 bg-[#131620]">
         <div className="mx-auto max-w-6xl px-6 py-16 lg:px-10 lg:py-20">
-          <h2 className="font-serif text-3xl text-white sm:text-4xl">Support RMC</h2>
+          <h2 className="font-serif text-3xl text-white sm:text-4xl">Industry Partners</h2>
           <p className="mt-4 max-w-2xl leading-7 text-neutral-400">
-            RMC is free for students in its inaugural year. Sponsors make it possible to keep
-            registration open, develop original problems, and build tools like the live buzzer platform.
+            RMC is supported by leading quantitative finance and technology firms. These partners recognize the rigorous caliber of our student participants and provide direct access to highly sought-after recruiting events.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {sponsorTiers.map((tier) => (
+          <div className="mt-8 flex flex-wrap gap-4">
+            {industryPartners.map((partner) => (
               <span
-                key={tier.name}
-                className="border border-white/15 px-4 py-2 text-sm text-neutral-400"
+                key={partner.name}
+                className={`border px-6 py-4 text-sm sm:text-base font-semibold ${
+                  partner.placeholder 
+                    ? "border-amber-500/30 bg-amber-500/10 text-amber-500" 
+                    : "border-white/15 bg-white/5 text-neutral-300"
+                }`}
               >
-                {tier.name}
+                {partner.name}
               </span>
             ))}
+            <Link
+              href="/sponsors"
+              className="border border-dashed border-white/25 px-6 py-4 text-sm sm:text-base font-medium text-neutral-400 transition hover:bg-white/5 hover:text-white"
+            >
+              + Become a Founding Partner
+            </Link>
           </div>
           <Link
             href="/sponsors"
             className="mt-8 inline-block text-sm font-medium text-amber-400 transition hover:text-amber-300"
           >
-            Become a sponsor &rarr;
+            View all sponsors and benefits &rarr;
           </Link>
         </div>
       </section>

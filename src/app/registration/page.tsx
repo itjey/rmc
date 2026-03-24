@@ -323,6 +323,30 @@ export default async function RegistrationPage({
                     className="w-full border border-[var(--border)] bg-[var(--background)] px-3 py-3 text-sm text-[var(--foreground)] outline-none transition-colors placeholder:text-[var(--muted)] focus:border-[var(--accent)]"
                   />
                 </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <input
+                    name="linkedinUrl"
+                    type="url"
+                    placeholder="LinkedIn URL (Optional)"
+                    className="w-full border border-[var(--border)] bg-[var(--background)] px-3 py-3 text-sm text-[var(--foreground)] outline-none transition-colors placeholder:text-[var(--muted)] focus:border-[var(--accent)]"
+                  />
+                  <input
+                    name="resumeUrl"
+                    type="url"
+                    placeholder="Resume Link (e.g. Google Drive) (Optional)"
+                    className="w-full border border-[var(--border)] bg-[var(--background)] px-3 py-3 text-sm text-[var(--foreground)] outline-none transition-colors placeholder:text-[var(--muted)] focus:border-[var(--accent)]"
+                  />
+                </div>
+                <label className="mt-3 flex items-start gap-3 border border-[var(--border)] bg-[var(--background)] p-4">
+                  <input
+                    type="checkbox"
+                    name="shareDataWithSponsors"
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--accent)]"
+                  />
+                  <span className="text-xs leading-5 text-[var(--muted)]">
+                    <strong className="text-white">Opt-In: Resume Book & Recruiting.</strong> I agree to share my contact information, LinkedIn, and resume with RMC's official industry partners for exclusive recruiting opportunities.
+                  </span>
+                </label>
                 <label className="mt-3 flex items-start gap-3 border border-[var(--border)] bg-[var(--background)] p-4">
                   <input
                     type="checkbox"

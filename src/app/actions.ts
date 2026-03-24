@@ -29,15 +29,37 @@ export async function registerContestant(formData: FormData) {
   const teamPreference = text(formData.get("teamPreference"));
   const guardianName = text(formData.get("guardianName"));
   const guardianEmail = text(formData.get("guardianEmail")).toLowerCase();
+  const linkedinUrl = text(formData.get("linkedinUrl"));
+  const resumeUrl = text(formData.get("resumeUrl"));
+  const shareDataWithSponsors = formData.get("shareDataWithSponsors") === "on";
 
   if (!name || !email || !school || !country || !grade || !division || !timezone) {
     redirect("/registration?message=Please%20complete%20the%20required%20student%20fields#student-form");
   }
 
+  const gradYearInt = graduationYear ? parseInt(graduationYear, 10) : null;
+
   await prisma.contestant.upsert({
     where: { email },
-    update: { name, school, country },
-    create: { name, email, school, country },
+    update: { 
+      name, 
+      school, 
+      country,
+      graduationYear: gradYearInt,
+      linkedinUrl: linkedinUrl || null,
+      resumeUrl: resumeUrl || null,
+      shareDataWithSponsors
+    },
+    create: { 
+      name, 
+      email, 
+      school, 
+      country,
+      graduationYear: gradYearInt,
+      linkedinUrl: linkedinUrl || null,
+      resumeUrl: resumeUrl || null,
+      shareDataWithSponsors
+    },
   });
 
   await prisma.$executeRawUnsafe(

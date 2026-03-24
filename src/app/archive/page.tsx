@@ -141,9 +141,16 @@ export default function ArchivePage() {
                               <span className="flex h-6 w-6 shrink-0 items-center justify-center bg-[var(--background)] font-mono text-xs font-bold text-[var(--muted)]">
                                 {problem.number}
                               </span>
-                              <p className="pt-0.5 leading-7 text-[var(--foreground)]">
-                                {problem.statement}
-                              </p>
+                              <div className="pt-0.5">
+                                {problem.difficulty && (
+                                  <span className="mb-2 inline-block rounded-full bg-[var(--background)] px-2.5 py-0.5 text-xs font-medium text-[var(--muted)] border border-[var(--border)]">
+                                    {problem.difficulty}
+                                  </span>
+                                )}
+                                <p className="leading-7 text-[var(--foreground)]">
+                                  {problem.statement}
+                                </p>
+                              </div>
                             </li>
                           ))}
                         </ol>

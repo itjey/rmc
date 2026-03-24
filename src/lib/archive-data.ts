@@ -30,6 +30,7 @@ export type ArchiveProblem = {
   statement: string;
   answer: string;
   solution?: string;
+  difficulty?: string;
 };
 
 export type ArchivePacket = {
@@ -52,6 +53,7 @@ export const archivePackets: ArchivePacket[] = [
     problems: [
       {
         number: 1,
+        difficulty: "AMC 8 Level",
         statement: "Compute 1 + 2 + 3 + \u2026 + 50.",
         answer: "1275",
         solution:
@@ -59,6 +61,7 @@ export const archivePackets: ArchivePacket[] = [
       },
       {
         number: 2,
+        difficulty: "AMC 8 Level",
         statement: "How many factors does 360 have?",
         answer: "24",
         solution:
@@ -66,6 +69,7 @@ export const archivePackets: ArchivePacket[] = [
       },
       {
         number: 3,
+        difficulty: "AMC 10 Level",
         statement:
           "What is the area of a triangle with vertices at (0,0), (6,0), and (3,4)?",
         answer: "12",
@@ -74,6 +78,7 @@ export const archivePackets: ArchivePacket[] = [
       },
       {
         number: 4,
+        difficulty: "AMC 10 Level",
         statement:
           "Find the sum of the first 5 terms of the geometric sequence 3, 6, 12, 24, \u2026",
         answer: "93",
@@ -82,6 +87,7 @@ export const archivePackets: ArchivePacket[] = [
       },
       {
         number: 5,
+        difficulty: "AMC 12 Level",
         statement:
           "How many 3-element subsets of {1, 2, 3, 4, 5, 6, 7} have the property that no two elements are consecutive?",
         answer: "10",
@@ -90,6 +96,7 @@ export const archivePackets: ArchivePacket[] = [
       },
       {
         number: 6,
+        difficulty: "AMC 10 Level",
         statement:
           "Find the positive integer n such that n\u00b2 + n = 156.",
         answer: "12",
@@ -98,6 +105,7 @@ export const archivePackets: ArchivePacket[] = [
       },
       {
         number: 7,
+        difficulty: "AMC 12 Level",
         statement:
           "In a triangle with sides 7, 24, and 25, what is the length of the altitude to the longest side?",
         answer: "168/25",
@@ -106,6 +114,7 @@ export const archivePackets: ArchivePacket[] = [
       },
       {
         number: 8,
+        difficulty: "AIME Level",
         statement:
           "How many integers between 1 and 1000 inclusive are divisible by neither 6 nor 10?",
         answer: "767",
@@ -114,6 +123,7 @@ export const archivePackets: ArchivePacket[] = [
       },
       {
         number: 9,
+        difficulty: "AIME Level",
         statement:
           "Let p(x) = x\u00b3 \u2212 6x\u00b2 + 11x \u2212 6. Find the sum of the squares of the roots of p.",
         answer: "14",
@@ -122,6 +132,7 @@ export const archivePackets: ArchivePacket[] = [
       },
       {
         number: 10,
+        difficulty: "AIME Level",
         statement:
           "A 3\u00d73 grid is to be filled with the digits 1 through 9, each used exactly once, so that each row has an increasing sequence from left to right. How many such arrangements are possible?",
         answer: "1680",
@@ -140,22 +151,26 @@ export const archivePackets: ArchivePacket[] = [
     problems: [
       {
         number: 1,
+        difficulty: "AMC 8 Level",
         statement: "What is 25% of 120?",
         answer: "30",
       },
       {
         number: 2,
+        difficulty: "AMC 8 Level",
         statement: "How many prime numbers are less than 20?",
         answer: "8",
       },
       {
         number: 3,
+        difficulty: "AMC 8 Level",
         statement:
           "What is the perimeter of a rectangle with area 24 and width 4?",
         answer: "20",
       },
       {
         number: 4,
+        difficulty: "AMC 10 Level",
         statement: "Simplify: 3\u2074 \u2212 2\u2074.",
         answer: "65",
       },

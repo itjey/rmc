@@ -8,12 +8,16 @@ datasource db {
 }
 
 model Contestant {
-  id        String   @id @default(cuid())
-  name      String
-  email     String   @unique
-  school    String
-  country   String
-  createdAt DateTime @default(now())
+  id                    String   @id @default(cuid())
+  name                  String
+  email                 String   @unique
+  school                String
+  country               String
+  graduationYear        Int?
+  resumeUrl             String?
+  linkedinUrl           String?
+  shareDataWithSponsors Boolean  @default(false)
+  createdAt             DateTime @default(now())
 }
 
 model Problem {
